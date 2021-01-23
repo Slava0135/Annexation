@@ -5,4 +5,7 @@ Mindustry PVP plugin:
 * In order to win you can either destroy the enemy or get the win score
 
 Works best with [Recapture](https://github.com/Slava0135/Recapture) and [UltraHardCores](https://github.com/Slava0135/UltraHardCores)
+
+You can edit values in ***config.properties***
+
 #### Use JDK 14 (but jar should work on JRE 1.8)
