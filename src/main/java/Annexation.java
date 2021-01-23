@@ -44,6 +44,8 @@ public class Annexation extends Plugin {
                 if (bestScore > winScore) {
                     var winner = maxScore.getKey();
                     Events.fire(new EventType.GameOverEvent(winner));
+                    scores.clear();
+                    lastIncrease.clear();
                 }
             }
 
