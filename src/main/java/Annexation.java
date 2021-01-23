@@ -11,14 +11,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 public class Annexation extends Plugin {
     HashMap<Team, Integer> scores = new HashMap<>();
     HashMap<Team, Integer> lastIncrease = new HashMap<>();
 
-    int winScore = 10000;
-    int updateInterval = 10;
+    int winScore = -1;
+    int updateInterval = -1;
 
     @Override
     public void init() {
@@ -30,8 +29,8 @@ public class Annexation extends Plugin {
             e.printStackTrace();
         }
 
-        winScore = (int) props.getOrDefault("winScore", winScore);
-        updateInterval = (int) props.getOrDefault("updateInterval", updateInterval);
+        winScore = Integer.parseInt(props.getProperty("winScore"));
+        updateInterval = Integer.parseInt(props.getProperty("updateInterval"));
 
         Timer.schedule(() -> {
 
