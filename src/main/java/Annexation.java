@@ -23,9 +23,8 @@ public class Annexation extends Plugin {
     @Override
     public void init() {
 
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
         Properties props = new Properties();
-        try(InputStream resourceStream = loader.getResourceAsStream("config.properties")) {
+        try(InputStream resourceStream = Annexation.class.getResourceAsStream("config.properties")) {
             props.load(resourceStream);
         } catch (IOException e) {
             e.printStackTrace();
