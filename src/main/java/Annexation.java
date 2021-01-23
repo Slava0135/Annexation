@@ -44,7 +44,7 @@ public class Annexation extends Plugin {
                 }
             }
 
-            var progress = "Winscore: " + winScore;
+            var progress = "winscore is " + winScore;
             for (var team : scores.keySet()) {
                 if (team.active()) {
                     progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
