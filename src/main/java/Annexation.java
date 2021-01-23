@@ -1,8 +1,11 @@
 import arc.Events;
+import arc.struct.Seq;
 import arc.util.Timer;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.game.Team;
+import mindustry.game.Teams.*;
+import mindustry.gen.Building;
 import mindustry.gen.Call;
 import mindustry.mod.Plugin;
 
@@ -35,11 +38,11 @@ public class Annexation extends Plugin {
 
         Timer.schedule(() -> {
 
-            var teams = Vars.state.teams.present;
-            for (var team : teams) {
-                var scoreIncrease = 0;
+            Seq<TeamData> teams = Vars.state.teams.present;
+            for (TeamData team : teams) {
+                int scoreIncrease = 0;
                 if (team.team == Team.derelict) continue;
-                for (var core : team.cores) {
+                for (Building core : team.cores) {
                     scoreIncrease += core.block.size;
                 }
                 lastIncrease.put(team.team, scoreIncrease);
@@ -47,24 +50,24 @@ public class Annexation extends Plugin {
             }
 
             Map.Entry<Team, Integer> maxScore = null;
-            for (var score : scores.entrySet()) {
+            for (Map.Entry<Team, Integer> score : scores.entrySet()) {
                 if (maxScore == null || score.getValue() > maxScore.getValue()) {
                     maxScore = score;
                 }
             }
 
             if (maxScore != null) {
-                var bestScore = maxScore.getValue();
+                int bestScore = maxScore.getValue();
                 if (bestScore > winScore) {
-                    var winner = maxScore.getKey();
+                    Team winner = maxScore.getKey();
                     Events.fire(new EventType.GameOverEvent(winner));
                     scores.clear();
                     lastIncrease.clear();
                 }
             }
 
-            var progress = "winscore is " + winScore;
-            for (var team : scores.keySet()) {
+            String progress = "winscore is " + winScore;
+            for (Team team : scores.keySet()) {
                 if (team.active()) {
                     progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
                 } else {
