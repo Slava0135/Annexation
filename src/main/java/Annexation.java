@@ -13,7 +13,8 @@ public class Annexation extends Plugin {
     HashMap<Team, Integer> scores = new HashMap<>();
     HashMap<Team, Integer> lastIncrease = new HashMap<>();
 
-    int winScore = 1000;
+    int winScore = 500;
+    int updateInterval = 10;
 
     @Override
     public void init() {
@@ -55,8 +56,8 @@ public class Annexation extends Plugin {
                     lastIncrease.remove(team);
                 }
             }
-
             Call.setHudTextReliable(progress);
-        }, 0, 10f);
+
+        }, 0, updateInterval);
     }
 }
