@@ -37,19 +37,16 @@ public class Annexation extends Plugin {
             }
             if (maxScore != null && maxScore.getValue() > winScore) Call.gameOver(maxScore.getKey());
 
-        }, 0, 10f);
-
-        Timer.schedule(() -> {
-            var progress = new StringBuilder();
+            var progress = "Winscore: " + winScore + "\n";
             for (var team : scores.keySet()) {
                 if (team.active()) {
-                    progress.append(team.name).append(":").append(scores.getOrDefault(team, 0)).append("+").append(lastIncrease.getOrDefault(team, 0)).append("\n");
+                    progress += "[" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]\n";
                 } else {
                     scores.remove(team);
                     lastIncrease.remove(team);
                 }
             }
-            Call.announce(progress.toString());
-        }, 0, 1f);
+            Call.announce(progress);
+        }, 0, 60f);
     }
 }
