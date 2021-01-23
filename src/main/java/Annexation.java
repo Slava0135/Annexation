@@ -35,7 +35,14 @@ public class Annexation extends Plugin {
                     maxScore = score;
                 }
             }
-            if (maxScore != null && maxScore.getValue() > winScore) Call.gameOver(maxScore.getKey());
+
+            if (maxScore != null) {
+                var bestScore = maxScore.getValue();
+                if (bestScore > winScore) {
+                    var winner = maxScore.getKey();
+                    Call.gameOver(winner);
+                }
+            }
 
             var progress = "Winscore: " + winScore;
             for (var team : scores.keySet()) {
