@@ -1,5 +1,7 @@
+import arc.Events;
 import arc.util.Timer;
 import mindustry.Vars;
+import mindustry.game.EventType;
 import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.mod.Plugin;
@@ -40,8 +42,7 @@ public class Annexation extends Plugin {
                 var bestScore = maxScore.getValue();
                 if (bestScore > winScore) {
                     var winner = maxScore.getKey();
-                    Call.updateGameOver(winner);
-                    Call.gameOver(winner);
+                    Events.fire(new EventType.GameOverEvent(winner));
                 }
             }
 
