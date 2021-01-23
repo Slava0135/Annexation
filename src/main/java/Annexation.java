@@ -1,5 +1,6 @@
 import arc.Events;
 import arc.struct.Seq;
+import arc.util.Align;
 import arc.util.Timer;
 import mindustry.Vars;
 import mindustry.game.EventType;
@@ -75,7 +76,7 @@ public class Annexation extends Plugin {
                     lastIncrease.remove(team);
                 }
             }
-            Call.setHudTextReliable(progress);
+            Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
         }, 0, updateInterval);
     }
