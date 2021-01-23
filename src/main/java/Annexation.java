@@ -6,18 +6,33 @@ import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.mod.Plugin;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class Annexation extends Plugin {
     HashMap<Team, Integer> scores = new HashMap<>();
     HashMap<Team, Integer> lastIncrease = new HashMap<>();
 
-    int winScore = 500;
+    int winScore = 10000;
     int updateInterval = 10;
 
     @Override
     public void init() {
+
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        Properties props = new Properties();
+        try(InputStream resourceStream = loader.getResourceAsStream("config.properties")) {
+            props.load(resourceStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        winScore = (int) props.getOrDefault("winScore", winScore);
+        updateInterval = (int) props.getOrDefault("updateInterval", updateInterval);
 
         Timer.schedule(() -> {
 
