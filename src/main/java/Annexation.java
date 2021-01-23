@@ -1,7 +1,5 @@
-import arc.Events;
 import arc.util.Timer;
 import mindustry.Vars;
-import mindustry.game.EventType;
 import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.mod.Plugin;
@@ -39,19 +37,17 @@ public class Annexation extends Plugin {
             }
             if (maxScore != null && maxScore.getValue() > winScore) Call.gameOver(maxScore.getKey());
 
-        }, 0, 60f);
-
-        Timer.schedule(() -> {
-            var progress = "Winscore: " + winScore + "\n";
+            var progress = "Winscore: " + winScore;
             for (var team : scores.keySet()) {
                 if (team.active()) {
-                    progress += "[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]\n";
+                    progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
                 } else {
                     scores.remove(team);
                     lastIncrease.remove(team);
                 }
             }
-            Call.setHudText(progress);
-        }, 0, 5f);
+
+            Call.setHudTextReliable(progress);
+        }, 0, 10f);
     }
 }
