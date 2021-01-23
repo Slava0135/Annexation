@@ -22,6 +22,7 @@ public class Annexation extends Plugin {
     @Override
     public void init() {
 
+        //load config
         Properties props = new Properties();
         try(InputStream resourceStream = Annexation.class.getResourceAsStream("config.properties")) {
             props.load(resourceStream);
