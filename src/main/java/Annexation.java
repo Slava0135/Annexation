@@ -40,6 +40,7 @@ public class Annexation extends Plugin {
                 var bestScore = maxScore.getValue();
                 if (bestScore > winScore) {
                     var winner = maxScore.getKey();
+                    Call.updateGameOver(winner);
                     Call.gameOver(winner);
                 }
             }
