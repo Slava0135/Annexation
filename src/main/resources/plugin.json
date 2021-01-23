@@ -1,0 +1,7 @@
+{
+  "name": "Annexation",
+  "description": "Capture cores, get points and win. Requires Slava0135/Recapture.",
+  "author": "Slava0135",
+  "main": "Annexation",
+  "version": "1.0"
+}
