@@ -82,7 +82,7 @@ public class Annexation extends Plugin {
                 if(count > topLength) break;
                 Team team = entry.getKey();
                 int score = entry.getValue();
-                progress += "\n# " + count + "[#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
+                progress += "\n#" + count + " [#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
             }
             Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
