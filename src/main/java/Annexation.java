@@ -12,9 +12,7 @@ import mindustry.mod.Plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class Annexation extends Plugin {
     HashMap<Team, Integer> scores = new HashMap<>();
@@ -22,6 +20,7 @@ public class Annexation extends Plugin {
 
     int winScore = -1;
     int updateInterval = -1;
+    int topLength = -1;
 
     @Override
     public void init() {
@@ -36,6 +35,7 @@ public class Annexation extends Plugin {
 
         winScore = Integer.parseInt(props.getProperty("winScore"));
         updateInterval = Integer.parseInt(props.getProperty("updateInterval"));
+        topLength = Integer.parseInt(props.getProperty("topLength"));
 
         Timer.schedule(() -> {
 
@@ -68,9 +68,19 @@ public class Annexation extends Plugin {
             scores.entrySet().removeIf(entry -> !entry.getKey().active());
             lastIncrease.entrySet().removeIf(entry -> !entry.getKey().active());
 
+            List<Map.Entry<Team, Integer>> list = new ArrayList<>(scores.entrySet());
+            list.sort(Map.Entry.comparingByValue());
+            list.sort(Collections.reverseOrder());
+
             String progress = "winscore is " + winScore;
-            for (Team team : scores.keySet()) {
-                progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
+
+            int count = 0;
+            for (Map.Entry<Team, Integer> entry : list) {
+                if(count > topLength) break;
+                Team team = entry.getKey();
+                int score = entry.getValue();
+                progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
+                count++;
             }
             Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
