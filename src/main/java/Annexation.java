@@ -67,14 +67,12 @@ public class Annexation extends Plugin {
                 }
             }
 
+            scores.entrySet().removeIf(entry -> !entry.getKey().active());
+            lastIncrease.entrySet().removeIf(entry -> !entry.getKey().active());
+
             String progress = "winscore is " + winScore;
             for (Team team : scores.keySet()) {
-                if (team.active()) {
-                    progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
-                } else {
-                    scores.remove(team);
-                    lastIncrease.remove(team);
-                }
+                progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + scores.getOrDefault(team, 0) + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
             }
             Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
