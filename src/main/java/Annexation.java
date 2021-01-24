@@ -62,8 +62,6 @@ public class Annexation extends Plugin {
                 if (bestScore > winScore) {
                     Team winner = maxScore.getKey();
                     Events.fire(new EventType.GameOverEvent(winner));
-                    scores.clear();
-                    lastIncrease.clear();
                 }
             }
 
@@ -77,5 +75,10 @@ public class Annexation extends Plugin {
             Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
         }, 0, updateInterval);
+
+        Events.on(EventType.WorldLoadEvent.class, e -> {
+            scores.clear();
+            lastIncrease.clear();
+        });
     }
 }
