@@ -78,11 +78,11 @@ public class Annexation extends Plugin {
 
             int count = 0;
             for (Map.Entry<Team, Integer> entry : list) {
+                count++;
                 if(count > topLength) break;
                 Team team = entry.getKey();
                 int score = entry.getValue();
-                progress += "\n[#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
-                count++;
+                progress += "\n# " + count + "[#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
             }
             Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
 
