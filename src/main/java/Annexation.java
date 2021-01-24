@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+import static java.util.Collections.reverse;
+
 public class Annexation extends Plugin {
     HashMap<Team, Integer> scores = new HashMap<>();
     HashMap<Team, Integer> lastIncrease = new HashMap<>();
@@ -70,7 +72,7 @@ public class Annexation extends Plugin {
 
             List<Map.Entry<Team, Integer>> list = new ArrayList<>(scores.entrySet());
             list.sort(Map.Entry.comparingByValue());
-            list.sort(Collections.reverseOrder());
+            reverse(list);
 
             String progress = "winscore is " + winScore;
 
