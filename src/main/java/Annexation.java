@@ -86,11 +86,11 @@ public class Annexation extends Plugin {
                     progress += "\n#" + count + " [#" + team.color.toString() + "]" + team.name + " : " + score + " + " + lastIncrease.getOrDefault(team, 0) + "[]";
                 }
 
-                if (count == 1) {
-                    Events.fire(new EventType.GameOverEvent(list.stream().findFirst().get().getKey()));
-                }
-
                 Call.infoPopup(progress, updateInterval, Align.bottom, 0, 0, 0, 0);
+            }
+
+            if (scores.size() == 1) {
+                Events.fire(new EventType.GameOverEvent(scores.keySet().stream().findFirst().get()));
             }
 
         }, 0, updateInterval);
